@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Properties
+{% endblock title %}
+
+{% load static %}
+
+{% load humanize %}
+
+{% block body %}
+
+
+
+{% include 'partials/navbar.html' %}
+
+<section id="showcase-inner" class="py-5 text-white">
+   <div class="container">
+      <div class="row text-center">
+         <div class="col-md-12">
+            <h1 class="display-4">Browse Our Properties</h1>
+            <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
+         </div>
+      </div>
+   </div>
+</section>
+
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+   <div class="container">
+      <nav aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+               <a href="{% url 'index' %}">
+                  <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item active"> Browse Listings</li>
+         </ol>
+      </nav>
+   </div>
+</section>
+
+<!-- Listings -->
+<section id="listings" class="py-4">
+   <div class="container">
+      <div class="row">
+
+      {% if properties %}
+
+         {% for property in properties %}
+
+         <!-- Listing 1 -->
+         <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+               <img class="card-img-top" src="{{ property.photo_main.url }}" alt="">
+               <div class="card-img-overlay">
+                  <h2>
+                     <span class="badge badge-secondary text-white">${{ property.price | intcomma }} </span>
+                  </h2>
+               </div>
+               <div class="card-body">
+                  <div class="listing-heading text-center">
+                     <h4 class="text-primary">{{ property.title }}</h4>
+                     <p>
+                        <i class="fas fa-map-marker text-secondary"></i> {{ property.city }} {{ property.state }},
+                        {{ property.zipcode }}</p>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-th-large"></i> Sqft: {{ property.sqft }}</div>
+                     <div class="col-6">
+                        <i class="fas fa-car"></i> Garage: {{ property.garage }}</div>
+                  </div>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-6">
+                        <i class="fas fa-bed"></i> Bedrooms: {{ property.bedrooms }}</div>
+                     <div class="col-6">
+                        <i class="fas fa-bath"></i> Bathrooms: {{ property.bathrooms }}</div>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                     <div class="col-12">
+                        <i class="fas fa-user"></i> {{ property.realtor }}</div>
+                  </div>
+                  <div class="row text-secondary pb-2">
+                     <div class="col-6">
+                        <i class="fas fa-clock"></i> {{ property.list_date | timesince }}</div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'property' property.id %}" class="btn btn-primary btn-block">More Info</a>
+               </div>
+            </div>
+         </div>
+
+
+         {% endfor %}
+
+      {% else %}
+
+         <div class="col-md-12">
+            <h1>No properties available </h1>
+         </div>
+
+      {% endif %}
+
+
+      </div>
+
+
+      {#  pagination #}
+
+
+
+
+
+
+      <div class="row">
+         <div class="col-md-12">
+
+            {% if properties.has_other_pages %}
+               <ul class="pagination">
+
+               {% if properties.has_previous %}
+                  <li class="page-item ">
+                     <a class="page-link" href="?page={{properties.previous_page_number}}">&laquo;</a>
+                  </li>
+               {% else %}
+                  <li class="page-item disabled">
+                     <a class="page-link">&laquo;</a>
+                  </li>
+               {% endif %}
+
+               {% for i in properties.paginator.page_range %}
+                  {% if properties.number == i %}
+                     <li class="page-item active">
+                        <a class="page-link">{{i}}</a>
+                     </li>
+                  {% else %}
+                     <li class="page-item ">
+                        <a class="page-link" href="?page={{i}}">{{i}}</a>
+                     </li>
+                  {% endif %}
+               {% endfor %}
+
+
+               {% if properties.has_next %}
+                  <li class="page-item ">
+                     <a class="page-link" href="?page={{properties.next_page_number}}">&raquo;</a>
+                  </li>
+               {% else %}
+                  <li class="page-item disabled">
+                     <a class="page-link ">&raquo;</a>
+                  </li>
+               {% endif %}
+            {% endif %}
+
+         </div>
+      </div>
+
+   </div>
+</section>
+
+{% include 'partials/topbar.html' %}
+
+{% include 'partials/footer.html' %}
+
+{% endblock body %}
