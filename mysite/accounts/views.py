@@ -18,8 +18,9 @@ def login(request):
             return redirect('dashboard')
         else:
             messages.error(request, 'Invalid credentials')
-            return redirect('login')    
+            return redirect('login')
     return render(request, 'accounts/login.html')
+
 
 def register(request):
     if request.method == 'POST':
@@ -39,34 +40,38 @@ def register(request):
                 messages.error(request, 'This email is in use')
                 return redirect('register')
 
-            else: #looks good
-                user = User.objects.create_user(first_name=first_name, last_name=last_name,                             username=username, email=email, password=password)
+            else:  # looks good
+                user = User.objects.create_user(first_name=first_name, last_name=last_name,
+                                                username=username, email=email, password=password)
                 ''' to login user at once'''
                 # auth.login(request, user)
                 # messages.success(request, "You've been logged in successfully")
                 # return redirect('index')
                 ''' to make user login manually'''
                 user.save()
-                messages.success(request, 'Success! You are registered and can now login')
+                messages.success(
+                    request, 'Success! You are registered and can now login')
                 return redirect('login')
-            
+
         messages.error(request, "Passwords do not match")
         return redirect('register')
 
     return render(request, 'accounts/register.html')
+
 
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         messages.info(request, "You're now logged out")
         return redirect('index')
-   
+
 
 @login_required
 def dashboard(request):
     # pylint: disable = no-member
-    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
+    user_contacts = Contact.objects.order_by(
+        '-contact_date').filter(user_id=request.user.id)
     context = {
         'contacts': user_contacts
     }
-    return render(request, 'accounts/dashboard.html', context)        
+    return render(request, 'accounts/dashboard.html', context)
