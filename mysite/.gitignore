@@ -1,6 +1,9 @@
 env
 /media
 /static
-__pycache__
+__pycache__/
 .vscode
 db.sqlite3
+*.pyc
+*.log
+*.pot
