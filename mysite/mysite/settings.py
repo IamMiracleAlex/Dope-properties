@@ -95,10 +95,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dopedatab',
-	    'USER': 'Miracle',
+        'NAME': 'mydb',
+	    'USER': 'postgres',
 	    'PASSWORD': '12345678',
-	    'HOST': 'dopedata.ceyu3tteanxd.us-east-2.rds.amazonaws.com',
+	    'HOST': 'database-1.ceyu3tteanxd.us-east-2.rds.amazonaws.com',
 	    'PORT': '5432',
     }
 }
