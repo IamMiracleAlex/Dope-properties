@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 from realtors.models import Realtor
 
 
@@ -26,7 +26,7 @@ class Property(models.Model):
     photo_5 = models.FileField(upload_to='photos/%Y/%m/%d/', blank=True)
     photo_6 = models.FileField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_published = models.BooleanField(default=True)
-    list_date = models.DateTimeField(default=datetime.now(), blank=True)
+    list_date = models.DateTimeField(default=timezone.now, blank=True)
     
     class Meta:
         verbose_name_plural = "Properties"
