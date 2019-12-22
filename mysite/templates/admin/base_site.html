@@ -1,17 +1,19 @@
  {% extends 'admin/base.html' %}
 
+{% block title %} Dope Properties | Admin Site {% endblock title %}
+
  {% load static %}
 
  {% block branding %}
 
     <h1 id="head" >
-       {# <img src="{% static 'img/logo.png' %}" alt="" width="80" height="50" class="brand_img"> #}
-
-        <em style="font-size: 3rem; font-weight: bolder; margin-right:3rem;">Dope</em> Admin Site
-       
+      <a href="{% url 'admin:index' %}">
+         <em style="font-size: 3rem; font-weight: bolder; margin-right:3rem; color: white;">Dope
+         </em>
+      </a>  
+        Admin Site
     </h1>
     
-
  {% endblock branding %}
 
  {% block extrastyle %}
@@ -20,8 +22,8 @@
    
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 
-    {% block title %}
-      Dope Properties | Admin Site
-{% endblock title %}
-
 {% endblock extrastyle %}
+
+
+
+ {% block nav-global %}{% endblock %}
