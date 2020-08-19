@@ -25,7 +25,7 @@ SECRET_KEY = '#6rp*lawtwf#a9jzkxm6qqdclg0hlg5va0!g5el*64w28g-@8!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['dopeproperties.ga', 'localhost']
 
 
 ADMINS =[('Miracle', 'collinsalex50@gmail.com')]
@@ -97,10 +97,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb',
-	    'USER': 'postgres',
-	    'PASSWORD': '12345678',
-	    'HOST': 'database-1.ceyu3tteanxd.us-east-2.rds.amazonaws.com',
+        'NAME': 'dopepropertiesdb',
+	    'USER': 'miracle',
+	    'PASSWORD': 'miracle',
+	    'HOST': 'localhost',
 	    'PORT': '5432',
     }
 }
